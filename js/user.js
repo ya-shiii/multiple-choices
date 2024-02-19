@@ -1,3 +1,37 @@
+// Function to fetch the username via AJAX
+function fetchUsername() {
+    $.ajax({
+        url: 'php/get_username.php', // Replace 'php/get_username.php' with the actual endpoint to fetch the username
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            // Update the welcome text with the retrieved username
+            updateWelcomeText(response.username);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching username:', error);
+        }
+    });
+}
+
+// Function to update the welcome text with the username
+function updateWelcomeText(username) {
+    // Get the welcome text element
+    const welcomeTextElement = document.getElementById('welcome-text');
+
+    // Replace [username] with the actual username
+    const welcomeMessage = 'Welcome ' + username;
+
+    // Update the text content of the welcome text element
+    welcomeTextElement.textContent = welcomeMessage;
+}
+
+// Call fetchUsername function to retrieve the username when the page loads
+$(document).ready(function() {
+    fetchUsername();
+});
+
+
 // Function to display questions and correct answers
 function displayQuestions(questions) {
     const formDiv = document.getElementById('form');
